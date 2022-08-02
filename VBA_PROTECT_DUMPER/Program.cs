@@ -192,42 +192,42 @@ namespace VBA_PROTECT_DUMPER
 
                 bool[] changed = { false, false, false };
 
-                string test_hueta = Encoding.Default.GetString(vbaTargetData);
+                string string_data = Encoding.Default.GetString(vbaTargetData);
 
 
-                if (test_hueta.Contains("CMG="))
+                if (string_data.Contains("CMG="))
                 {
-                    StringBuilder sb = new StringBuilder(test_hueta);
+                    StringBuilder sb = new StringBuilder(string_data);
                     sb.Replace("CMG=", "CMC=");
-                    test_hueta = sb.ToString(); ;
+                    string_data = sb.ToString(); ;
 
 
-                    if (!test_hueta.Contains("CMG="))
+                    if (!string_data.Contains("CMG="))
                         changed[0] = true;
                 }
 
 
 
-                if (test_hueta.Contains("DPB="))
+                if (string_data.Contains("DPB="))
                 {
-                    StringBuilder sb = new StringBuilder(test_hueta);
+                    StringBuilder sb = new StringBuilder(string_data);
                     sb.Replace("DPB=", "DPD=");
-                    test_hueta = sb.ToString();
+                    string_data = sb.ToString();
 
 
-                    if (!test_hueta.Contains("DPB="))
+                    if (!string_data.Contains("DPB="))
                         changed[1] = true;
                 }
 
 
-                if (test_hueta.Contains("GC="))
+                if (string_data.Contains("GC="))
                 {
-                    StringBuilder sb = new StringBuilder(test_hueta);
+                    StringBuilder sb = new StringBuilder(string_data);
                     sb.Replace("GC=", "CC=");
-                    test_hueta = sb.ToString();
+                    string_data = sb.ToString();
 
 
-                    if (!test_hueta.Contains("GC="))
+                    if (!string_data.Contains("GC="))
                         changed[2] = true;
                 }
 
@@ -240,7 +240,7 @@ namespace VBA_PROTECT_DUMPER
                     File.Delete($"{Environment.CurrentDirectory}\\Temp\\xl\\{g_VBA_target}");
                 }
 
-                byte[] PatchedBytes = Encoding.Default.GetBytes(test_hueta);
+                byte[] PatchedBytes = Encoding.Default.GetBytes(string_data);
 
 
                 using (var fs = new FileStream($"{Environment.CurrentDirectory}\\Temp\\xl\\{g_VBA_target}", FileMode.Create, FileAccess.Write))
